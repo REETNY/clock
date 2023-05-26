@@ -54,7 +54,7 @@ main{
     height: 100%;
     width: 7px;
     content: "";
-    background: royalblue;
+    background-color: var(--bgColor, royalblue);
     display: block;
     position: absolute;
     top: 50%;
@@ -70,7 +70,7 @@ main{
     position: absolute;
     top: 50%;
     left: 50%;
-    background: royalblue;
+    background-color: var(--bgColor, royalblue);
     transform: translate(-50%, -50%);
 }
 
