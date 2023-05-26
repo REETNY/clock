@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;0,900;1,700;1,900&display=swap');
+@font-face {
+    font-family: "myDigitalFont";
+    src: url(/fonts/DS2/digital-7.ttf);
+    font-weight: bolder;
+}
 
 *{
     margin: 0;
@@ -20,12 +25,21 @@ main{
     align-items: center;
     background: #282828;
     gap: 20px;
+    position: relative;
 }
 
 .appBody{
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
+}
+
+.chooseType{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+
 }
 
 .clock{
@@ -173,29 +187,105 @@ main{
 
 
 
-.analog{
-    width: 300px;
-    height: 100px;
-    border: 5px solid #131212;
+.digital{
+    width: 315px;
+    height: 135px;
+    border: 7px solid #131212;
     box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
     inset 4px 4px 10px rgba(0,0,0,0.5),
     inset -4px -4px 10px rgba(67,67,67,0.5),
     4px 4px 10px rgba(0,0,0,0.3);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 30px 1fr 60px;
+    position: relative;
+    display: none;
+}
+
+.digitalCont{
     display: flex;
+    background: #272626;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    column-gap: 18px;
+    box-shadow: 0px 0px 3px 4px rgba(41, 29, 29, 0.158) inset;
+    font-size: 25px;
+    font-family: "myDigitalFont", sans-serif;
+    font-weight: 900;
+    color: rgba(221, 39, 39, 0.904);
+}
+
+.meridian{
+    background: #272626;
+    padding-top: 20px;
+    position: relative;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    font-family: "myDigitalFont", sans-serif;
+}
+
+.meridian hr{
+    width: 70%;
+    background: grey;
+}
+
+.otherInfo{
+    background: #272626;
+    padding-top: 5px;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    padding-right: 5px;
+    font-family: "myDigitalFont", sans-serif;
+    color: rgba(221, 39, 39, 0.904);
+}
+
+.date{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.month,
+.day{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headMon{
+    font-size: 10px;
+}
+
+.headDay{
+    font-size: 10px;
+}
+
+.nowMon,
+.nowDate, .nowDay, .tmp{
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.currDay{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.analogCont{
+.temp{
     display: flex;
-    background: #272626;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 0px 3px 4px rgba(41, 29, 29, 0.158) inset;
-    font-size: 25px;
-    font-weight: 900;
-    color: rgba(221, 39, 39, 0.904);
+    justify-content: center;
 }

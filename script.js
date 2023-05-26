@@ -1,28 +1,45 @@
+// chooser
+const clockType = document.querySelector("#clockType")
+const digital = document.querySelector(".digital");
+const analogue = document.querySelector(".analogue");
+// analog clock hands
 let secondHand = document.querySelector(".secHand");
 let minuteHand = document.querySelector(".minHand");
-let  hourHand = document.querySelector(".hourHand")
-
-const hourNumAnalog = document.querySelector(".hourNum");
-const minNumAnalog = document.querySelector(".minNum");
-const secNumAnalog = document.querySelector(".secNum");
-const meridianAnalog = document.querySelector(".meridian");
-
+let  hourHand = document.querySelector(".hourHand");
 
 const mainTimePolesBox = document.getElementsByClassName("mainTimePoles")[0];
 const poles = document.querySelectorAll(".pole");
 
-const colorCodes = ["#CD1818", "#068DA9", "#F79327", "#F266AB", "#1B9C85", "#8B1874", "#212A3E", "#9A208C", "#C07F00", "#FFE15D", "#263A29", "#D3756B"];
+// digital clock display
+const hourNumDigital = document.querySelector(".hourNum");
+const minNumDigital = document.querySelector(".minNum");
+const secNumDigital = document.querySelector(".secNum");
+const meridianDigital = document.querySelector(".meridian");
 
+const nowMon = document.querySelector(".nowMon");
+const nowDate = document.querySelector(".nowDate");
+const nowDay = document.querySelector(".nowDay");
+
+const meridian = document.querySelector(".meridian");
+
+const tmpEl = document.querySelector(".tempEl");
+
+
+// color codes for clock
+const colorCodes = ["#CD1818", "#068DA9", "#F79327", "#F266AB", "#1B9C85", "#8B1874", "#212A3E", "#9A208C", "#C07F00", "#FFE15D", "#263A29", "#D3756B"];
 const handColors = ["#068DA9", "#F266AB", "#9A208C", "#D3756B"]
 
+
+// just to get current hour when loaded
 let melt = new Date().getTime();
 let oldHour = Math.floor((melt / 1000 / 3600 % 24) + 1);
-console.log(oldHour)
 
+// function that returns a random number
 function rn(arr){
     return Math.floor(Math.random() * arr.length)
 }
 
+// on load event listener to change colors
 window.onload = () => {
     let ranNum = Math.floor(Math.random() * colorCodes.length);
 
@@ -33,7 +50,9 @@ window.onload = () => {
     mainTimePolesBox.style.setProperty("--bgColor", colorCodes[rn(colorCodes)])
 }
 
-function getTime(){
+
+// analog timer function
+function analogTime(){
     let currTime = new Date().getTime()
 
     let currHour = Math.floor((currTime / 1000 / 3600 % 24) + 1);
@@ -54,14 +73,6 @@ function getTime(){
     minuteHand.style.transform = `rotate(${minuteDeg}deg)`
     hourHand.style.transform = `rotate(${hourDeg}deg)`
 
-    let analogHr = hour > 12 ? hour - 12 : hour
-    hourNumAnalog.textContent = `${analogHr > 9 ? analogHr : `0${analogHr}`}`;
-    minNumAnalog.textContent = `${(minute > 9 ? minute : `0${minute}`)}`;
-    secNumAnalog.textContent = `${sec > 9 ? sec : `0${sec}`}`;
-
-    let meridianTime = hoursHand > 12 ? "PM" : "AM";
-    meridianAnalog.innerText = `${meridianTime}`;
-
     if(currHour > oldHour){
         oldHour = currHour;
         let ranNum = Math.floor(Math.random() * colorCodes.length)
@@ -70,8 +81,6 @@ function getTime(){
         })
         mainTimePolesBox.style.setProperty("--bgColor", colorCodes[analogHr]);
     }
-
-    console.log(secondDeg)
 
     if(secondDeg === 0){
         secondHand.style.background = `${handColors[rn(handColors)]}`
@@ -87,6 +96,162 @@ function getTime(){
 
 }
 
-getTime()
-setInterval(getTime, 1000)
+analogTime()
+setInterval(analogTime, 1000)
 
+
+// digital time function and logic
+
+// on window loading
+
+let userState = "";
+
+let APIURL = `https://api.weatherapi.com/v1/current.json?key=`; // updated
+let APIKEY = `aaa5eb12cbca42e6b9385412223012`;
+
+async function weatherDetails(location){
+    try{
+        let serverResponse = await fetch(`${APIURL}+${APIKEY}&q=${location}`);
+        let resp = await serverResponse.json();
+        return resp;
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
+let lattitude;
+let longitude;
+
+let GEOCODINGKEY = `64336cfdc95e4fb58d5e897eacc762bd`;
+
+window.onload = () => {
+
+    getCoOrdinate();
+    otherInfo();
+
+    let loadedType = localStorage.getItem("clockType") || "";
+    clockType.value = loadedType;
+
+    if(loadedType == "Digital"){
+        digital.style.display = 'grid';
+        analogue.style.display = "none";
+    }else{
+        digital.style.display = 'none';
+        analogue.style.display = "block";
+    }
+
+}
+
+function getCoOrdinate(){
+    navigator.geolocation.getCurrentPosition((position) => {
+        lattitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+
+        if(lattitude !== "" || lattitude !== undefined){
+            getLocation(lattitude, longitude)
+        }else{
+            return
+        }
+        
+    })
+}
+
+async function getLocation(lattitude, longitude){
+    let serverResponse = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lattitude}+${longitude}&key=${GEOCODINGKEY}`);
+    let resp = await serverResponse.json();
+    let response = resp.results[0];
+    let {name} = response.annotations.timezone;
+    let stateArr = name.split("/");
+    let myState = stateArr[1];
+    userState = myState;
+
+    weatherDetails(userState).then( ({location, current}) => {
+        let currTemp = current.temp_c;
+        tmpEl.textContent = `${(currTemp)}`;
+    })
+}
+
+function getCurrDay(num){
+    if(num == 0){
+        return 'SUN'
+    }else if(num == 1){
+        return 'MON'
+    }else if(num == 2){
+        return 'TUE'
+    }else if(num == 3){
+        return 'WED'
+    }else if(num == 4){
+        return 'THUR'
+    }else if(num == 5){
+        return 'FRI'
+    }else{
+        return 'SAT'
+    }
+}
+
+function otherInfo(){
+    let dateFunc = new Date();
+    let currMonth = (dateFunc.getMonth() + 1);
+    let currDate = (dateFunc.getDate());
+    let currDay = getCurrDay(dateFunc.getDay());
+
+    let currHour = Math.floor((dateFunc.getTime() / 1000 / 3600 % 24) + 1);
+
+    let meridians = [...meridian.children];
+
+    if(currHour > 12){
+        meridians[0].style.color = `gray`;
+        meridians[2].style.color = `rgba(221, 39, 39, 0.904)`
+    }else{
+        meridians[0].style.color = `rgba(221, 39, 39, 0.904)`;
+        meridians[2].style.color = `gray`
+    }
+
+    nowMon.textContent = `${currMonth > 9 ? currMonth : `0${currMonth}`}`;
+    nowDate.textContent = `${currDate > 9 ? currDate : `0${currDate}`}`
+    nowDay.textContent = `${currDay}`
+}
+
+const pastHour = Math.floor((new Date().getTime()) / 1000 / 3600 % 24 + 1);
+
+function digitalTime(){
+    let currTime = new Date().getTime();
+
+    let hour = Math.floor((currTime / 1000 / 3600 % 24) + 1);
+    let minute = Math.floor(currTime / 1000 / 60 % 60);
+    let sec = Math.floor(currTime / 1000 % 60);
+
+    let analogHr = hour > 12 ? hour - 12 : hour
+    hourNumDigital.textContent = `${analogHr > 9 ? analogHr : `0${analogHr}`}`;
+    minNumDigital.textContent = `${(minute > 9 ? minute : `0${minute}`)}`;
+    secNumDigital.textContent = `${sec > 9 ? sec : `0${sec}`}`;
+
+    const currHr = Math.floor((new Date().getTime()) / 1000 / 3600 % 24 + 1);
+
+    if(currHr > pastHour){
+        otherInfo();
+        pastHour = currHr;
+        weatherDetails(userState).then( ({location, current}) => {
+            let currTemp = current.temp_c;
+            tmpEl.textContent = `${(currTemp)}`;
+        })
+    }
+}
+
+digitalTime();
+setInterval(digitalTime, 1000)
+
+
+clockType.addEventListener("change", (e) => {
+    console.log(e.target.value);
+    let userType = (e.target.value);
+    localStorage.setItem("clockType", userType);
+    if(userType == "Digital"){
+        digital.style.display = 'grid';
+        analogue.style.display = "none";
+    }else{
+        digital.style.display = 'none';
+        analogue.style.display = "block";
+    }
+})

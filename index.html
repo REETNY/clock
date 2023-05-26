@@ -11,9 +11,17 @@
     
     <main>
 
+        <div class="chooseType">
+            <span class="header">Choose Type:</span>
+            <select name="" id="clockType" class="type">
+                <option value="Analogue" class="diff" selected>Analogue</option>
+                <option value="Digital" class="diff">Digital</option>
+            </select>
+        </div>
+
         <div class="appBody">
 
-            <div class="clock">
+            <div class="clock analogue">
 
                 <div class="mainTimePoles">
                     <div class="pole poleOne"></div>
@@ -30,15 +38,45 @@
                 
             </div>
 
-            <div class="analog">
-                <div class="analogCont">
+            <div class="digital">
+
+                <div class="meridian">
+                    <span class="antiMed">AM</span>
+                    <hr>
+                    <span class="postMed">PM</span>
+                </div>
+
+                <div class="digitalCont">
                     <div class="time hourNum">00</div>
                     <span class="divisor">:</span>
                     <div class="time minNum">00</div>
                     <span class="divisor">:</span>
                     <div class="time secNum">00</div>
-                    <div class="meridian"></div>
                 </div>
+
+                <div class="otherInfo">
+                    <div class="date">
+                        <div class="month">
+                            <span class="headMon">MONTH</span>
+                            <span class="nowMon">08</span>
+                        </div>
+                        <div class="day">
+                            <span class="headDay">DATE</span>
+                            <span class="nowDate">24</span>
+                        </div>
+                    </div>
+                    <div class="currDay">
+                        <div class="today">DAY</div>
+                        <div class="nowDay">SAT</div>
+                    </div>
+                    <div class="temp">
+                        <span class="headTemp">TEMP</span>
+                        <span class="tmp">
+                            <span class="tempEl">00</span> <span class="unit">°C</span>
+                        </span>
+                    </div>
+                </div>
+
             </div>
 
         </div>
