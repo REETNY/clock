@@ -27,7 +27,7 @@ const tmpEl = document.querySelector(".tempEl");
 
 // color codes for clock
 const colorCodes = ["#CD1818", "#068DA9", "#F79327", "#F266AB", "#1B9C85", "#8B1874", "#212A3E", "#9A208C", "#C07F00", "#FFE15D", "#263A29", "#D3756B"];
-const handColors = ["#068DA9", "#F266AB", "#9A208C", "#D3756B"]
+const handColors = ["#068DA9", "#F266AB", "#9A208C", "#D3756B"];
 
 
 // just to get current hour when loaded
@@ -94,10 +94,12 @@ function analogTime(){
         minuteDeg.style.background = `${handColors[rn(handColors)]}`
     }
 
+    console.log(secondDeg)
+
 }
 
 analogTime()
-setInterval(analogTime, 1000)
+let analogueTimer = setInterval(analogTime, 1000)
 
 
 // digital time function and logic
@@ -130,13 +132,25 @@ window.onload = () => {
     getCoOrdinate();
     otherInfo();
 
-    let loadedType = localStorage.getItem("clockType") || "";
+    let loadedType = localStorage.getItem("clockType") || "Analogue";
     clockType.value = loadedType;
 
     if(loadedType == "Digital"){
         digital.style.display = 'grid';
         analogue.style.display = "none";
     }else{
+        digital.style.display = 'none';
+        analogue.style.display = "block";
+    }
+
+    if(loadedType == "Digital"){
+        clearInterval(analogueTimer);
+        digitalTimer = setInterval(digitalTime, 1000)
+        digital.style.display = 'grid';
+        analogue.style.display = "none";
+    }else{
+        clearInterval(digitalTimer);
+        analogueTimer = setInterval(analogTime, 1000);
         digital.style.display = 'none';
         analogue.style.display = "block";
     }
@@ -197,15 +211,17 @@ function otherInfo(){
     let currDay = getCurrDay(dateFunc.getDay());
 
     let currHour = Math.floor((dateFunc.getTime() / 1000 / 3600 % 24) + 1);
+    let currMin = Math.floor((dateFunc.getTime()) / 1000 / 60 % 60);
+    let currSec = Math.floor(dateFunc.getTime() / 1000 % 60);
 
     let meridians = [...meridian.children];
 
-    if(currHour > 12){
-        meridians[0].style.color = `gray`;
-        meridians[2].style.color = `rgba(221, 39, 39, 0.904)`
-    }else{
-        meridians[0].style.color = `rgba(221, 39, 39, 0.904)`;
-        meridians[2].style.color = `gray`
+    if(currHour >= 12 && currHour < 24){
+        meridians[1].style.color = `gray`;
+        meridians[3].style.color = `rgba(221, 39, 39, 0.904)`
+    }else if(currHour == 24 || currHour < 12){
+        meridians[1].style.color = `rgba(221, 39, 39, 0.904)`;
+        meridians[3].style.color = `gray`
     }
 
     nowMon.textContent = `${currMonth > 9 ? currMonth : `0${currMonth}`}`;
@@ -214,6 +230,7 @@ function otherInfo(){
 }
 
 const pastHour = Math.floor((new Date().getTime()) / 1000 / 3600 % 24 + 1);
+
 
 function digitalTime(){
     let currTime = new Date().getTime();
@@ -237,21 +254,46 @@ function digitalTime(){
             tmpEl.textContent = `${(currTemp)}`;
         })
     }
+
+    console.log(currHr)
 }
 
-digitalTime();
-setInterval(digitalTime, 1000)
 
+// choose type of clock type
 
 clockType.addEventListener("change", (e) => {
     console.log(e.target.value);
     let userType = (e.target.value);
     localStorage.setItem("clockType", userType);
     if(userType == "Digital"){
+        clearInterval(analogueTimer);
+        digitalTimer = setInterval(digitalTime, 1000)
         digital.style.display = 'grid';
         analogue.style.display = "none";
     }else{
+        clearInterval(digitalTimer);
+        analogueTimer = setInterval(analogTime, 1000);
         digital.style.display = 'none';
         analogue.style.display = "block";
+    }
+})
+
+let stopColorChange = setInterval(digitalColor, 3000)
+
+const colorChanger = document.querySelector(".colorChanger");
+function digitalColor(){
+    if(colorChanger.classList.contains("close"))return;
+    colorChanger.style.backgroundColor = `${colorCodes[rn(colorCodes)]}`
+}
+
+colorChanger.addEventListener("click", () => {
+    if(colorChanger.classList.contains("open")){
+        colorChanger.classList.remove("open");
+        colorChanger.classList.add("close");
+        clearInterval(stopColorChange);
+    }else{
+        colorChanger.classList.add("open");
+        colorChanger.classList.remove("close");
+        stopColorChange = setInterval(digitalColor, 3000);
     }
 })
