@@ -16,6 +16,8 @@ const minNumDigital = document.querySelector(".minNum");
 const secNumDigital = document.querySelector(".secNum");
 const meridianDigital = document.querySelector(".meridian");
 
+const digitalSettings = document.querySelector(".settings");
+
 const nowMon = document.querySelector(".nowMon");
 const nowDate = document.querySelector(".nowDate");
 const nowDay = document.querySelector(".nowDay");
@@ -74,7 +76,7 @@ function analogTime(){
     hourHand.style.transform = `rotate(${hourDeg}deg)`
 
     if(currHour > oldHour){
-        oldHour = currHour;
+        oldHour++;
         let ranNum = Math.floor(Math.random() * colorCodes.length)
         poles.forEach(pole => {
             pole.style.background = `${colorCodes[ranNum]}`
@@ -94,8 +96,6 @@ function analogTime(){
         minuteDeg.style.background = `${handColors[rn(handColors)]}`
     }
 
-    console.log(secondDeg)
-
 }
 
 analogTime()
@@ -104,9 +104,23 @@ let analogueTimer = setInterval(analogTime, 1000)
 
 // digital time function and logic
 
-// on window loading
-
 let userState = "";
+
+// digital clock settings
+digitalSettings.addEventListener("click", () => {
+    let userEntry = prompt("your state ?: ");
+    if(userEntry === "" || userEntry == null)return;
+    userEntry = userEntry.trim();
+    userState = userEntry;
+    localStorage.setItem("userState", userState);
+    weatherDetails(userState).then( ({location, current}) => {
+        if(current.temp_c === "" || current.temp_c == null || current.temp_c == undefined)return;
+        let currTemp = current.temp_c;
+        tmpEl.textContent = `${(currTemp)}`;
+    })
+})
+
+// on window loading
 
 let APIURL = `https://api.weatherapi.com/v1/current.json?key=`; // updated
 let APIKEY = `aaa5eb12cbca42e6b9385412223012`;
@@ -129,9 +143,16 @@ let GEOCODINGKEY = `64336cfdc95e4fb58d5e897eacc762bd`;
 
 window.onload = () => {
 
-    getCoOrdinate();
+    // getCoOrdinate();
+    userState = localStorage.getItem("userState") || "";
+    weatherDetails(userState).then( ({location, current}) => {
+        let currTemp = current.temp_c;
+        tmpEl.textContent = `${(currTemp)}`;
+    })
     otherInfo();
 
+
+    
     let loadedType = localStorage.getItem("clockType") || "Analogue";
     clockType.value = loadedType;
 
@@ -157,34 +178,35 @@ window.onload = () => {
 
 }
 
-function getCoOrdinate(){
-    navigator.geolocation.getCurrentPosition((position) => {
-        lattitude = position.coords.latitude;
-        longitude = position.coords.longitude;
+// function getCoOrdinate(){
+//     navigator.geolocation.getCurrentPosition((position) => {
+//         lattitude = position.coords.latitude;
+//         longitude = position.coords.longitude;
 
-        if(lattitude !== "" || lattitude !== undefined){
-            getLocation(lattitude, longitude)
-        }else{
-            return
-        }
+//         if(lattitude !== "" || lattitude !== undefined){
+//             getLocation(lattitude, longitude)
+//         }else{
+//             return
+//         }
         
-    })
-}
+//     })
+// }
 
-async function getLocation(lattitude, longitude){
-    let serverResponse = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lattitude}+${longitude}&key=${GEOCODINGKEY}`);
-    let resp = await serverResponse.json();
-    let response = resp.results[0];
-    let {name} = response.annotations.timezone;
-    let stateArr = name.split("/");
-    let myState = stateArr[1];
-    userState = myState;
+// async function getLocation(lattitude, longitude){
+//     let serverResponse = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lattitude}+${longitude}&key=${GEOCODINGKEY}`);
+//     let resp = await serverResponse.json();
+//     let response = resp.results[0];
+//     let {name} = response.annotations.timezone;
+//     let stateArr = name.split("/");
+//     let myState = stateArr[1];
+//     localStorage.setItem("userState", myState);
+//     userState = myState;
 
-    weatherDetails(userState).then( ({location, current}) => {
-        let currTemp = current.temp_c;
-        tmpEl.textContent = `${(currTemp)}`;
-    })
-}
+//     weatherDetails(userState).then( ({location, current}) => {
+//         let currTemp = current.temp_c;
+//         tmpEl.textContent = `${(currTemp)}`;
+//     })
+// }
 
 function getCurrDay(num){
     if(num == 0){
@@ -229,7 +251,7 @@ function otherInfo(){
     nowDay.textContent = `${currDay}`
 }
 
-const pastHour = Math.floor((new Date().getTime()) / 1000 / 3600 % 24 + 1);
+let pastHour = Math.floor((new Date().getTime()) / 1000 / 3600 % 24 + 1);
 
 
 function digitalTime(){
@@ -247,15 +269,20 @@ function digitalTime(){
     const currHr = Math.floor((new Date().getTime()) / 1000 / 3600 % 24 + 1);
 
     if(currHr > pastHour){
+        console.log(pastHour, currHr)
         otherInfo();
-        pastHour = currHr;
         weatherDetails(userState).then( ({location, current}) => {
             let currTemp = current.temp_c;
             tmpEl.textContent = `${(currTemp)}`;
         })
+        setTimeout(
+            () => {
+                pastHour++;
+            }, 5000
+        )
     }
 
-    console.log(currHr)
+    console.log(pastHour)
 }
 
 

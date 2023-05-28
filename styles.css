@@ -218,6 +218,52 @@ main{
     color: rgba(221, 39, 39, 0.904);
     border-left: 4px solid #131212;
     border-right: 4px solid #131212;
+    position: relative;
+}
+
+.controls{
+    width: 100%;
+    position: absolute;
+    bottom: 2px;
+    right: 20px;
+    display: flex;
+    justify-content: flex-end;
+    color: #131212;
+}
+
+.controls .settings{
+    position: relative;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.fa-cog{
+    color: #c0c0c0;
+}
+
+.cog1{
+    font-size: 21px;
+    position: relative;
+    animation: wheeldrive 3s infinite normal;
+}
+
+.cog2{
+    font-size: 15px;
+    position: absolute;
+    right: -13px;
+    bottom: 0px;
+    animation: wheeldrive 3s infinite normal;
+}
+
+.cog3{
+    font-size: 15px;
+    position: absolute;
+    right: -9px;
+    top: -8px;
+    animation: wheeldrive 3s infinite backwards;
 }
 
 .meridian{
@@ -314,4 +360,14 @@ main{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+
+
+
+
+@keyframes wheeldrive{
+    100%{
+        transform: rotate(360deg);
+    }
 }
