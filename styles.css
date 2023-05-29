@@ -42,6 +42,11 @@ main{
 
 }
 
+/* type one */
+#type1{
+    display: block;
+}
+
 .clock{
     width: 310px;
     height: 310px;
@@ -131,7 +136,7 @@ main{
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: black;
+    background: rgb(134, 129, 129);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -182,10 +187,310 @@ main{
     transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
 }
 
+/* type two */
+
+.mainTimePoles2{
+    width: 100%;
+    height: 100%;
+    background: wheat;
+    border-radius: 50%;
+    position: relative;
+}
+
+#type2{
+    display: none;
+}
+
+.numz{
+    display: block;
+    font-size: 18px;
+    color: tomato;
+    z-index: 8;
+}
+
+.mainafter{
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    /* background: #af87ce; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 11;
+}
+
+.mainbefore{
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    /* background: #af87ce; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 11;
+}
+
+.num3,.num9{
+    transform: rotate(-90deg);
+}
+
+.pole2{
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    /* background: #af87ce; */
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 11;
+}
+
+.poleOneII{
+    transform: translate(-50%, -50%) rotate(30deg);
+}
+
+.num1, .num7{
+    transform: rotate(-30deg);
+}
+
+.poleTwoII{
+    transform: translate(-50%, -50%) rotate(60deg);
+}
+
+.num2, .num8{
+    transform: rotate(-60deg);
+}
+
+.poleThreeII{
+    transform: translate(-50%, -50%) rotate(120deg);
+}
+
+.num4, .num10{
+    transform: rotate(-120deg);
+}
+
+.poleFourII{
+    transform: translate(-50%, -50%) rotate(150deg);
+}
+
+.num5, .num11{
+    transform: rotate(-150deg);
+}
+
+.clockCoverII{
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+    background: brown;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+}
+
+.clockCoverII::before{
+    width: 60%;
+    height: 60%;
+    background: goldenrod;
+    position: absolute;
+    content: "";
+    display: block;
+    border-radius: 50%;
+}
+
+.clockCoverII::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: gray;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.handII{
+    /* position: absolute; */
+    width: 50%;
+    position: absolute;
+    height: 6px;
+    background: aquamarine;
+    right: 50%;
+    top: 50%;
+    transform: translate(0%, -50%);
+    transform-origin: 100%;
+}
+
+.hourHandII{
+    width: 29%;
+    height: 9px;
+    background: greenyellow;
+}
+
+.minHandII{
+    width: 38%;
+    height: 6px;
+    background: olive;
+}
+
+.secHandII{
+    width: 49%;
+    height: 4px;
+    background: #ea1a7f;
+    /* transform: rotate(6deg); */
+}
+
+.otherPole2{
+    width: 4px;
+    height: 100%;
+    background: darkmagenta;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.flex2{
+    transform: translate(-50%, -50%) rotate(6deg);
+}
+
+.flex3{
+    transform: translate(-50%, -50%) rotate(12deg);
+}
+
+.flex4{
+    transform: translate(-50%, -50%) rotate(18deg);
+}
+
+.flex5{
+    transform: translate(-50%, -50%) rotate(24deg);
+}
+
+.flex6{
+    transform: translate(-50%, -50%) rotate(36deg);
+}
+
+.flex7{
+    transform: translate(-50%, -50%) rotate(42deg);
+}
+
+.flex8{
+    transform: translate(-50%, -50%) rotate(48deg);
+}
+
+.flex9{
+    transform: translate(-50%, -50%) rotate(54deg);
+}
+
+.flex10{
+    transform: translate(-50%, -50%) rotate(66deg);
+}
+
+.flex11{
+    transform: translate(-50%, -50%) rotate(72deg);
+}
+
+.flex12{
+    transform: translate(-50%, -50%) rotate(78deg);
+}
+
+.flex13{
+    transform: translate(-50%, -50%) rotate(84deg);
+}
+
+.flex14{
+    transform: translate(-50%, -50%) rotate(96deg);
+}
+
+.flex15{
+    transform: translate(-50%, -50%) rotate(102deg);
+}
+
+.flex16{
+    transform: translate(-50%, -50%) rotate(108deg);
+}
+
+.flex17{
+    transform: translate(-50%, -50%) rotate(114deg);
+}
+
+.flex18{
+    transform: translate(-50%, -50%) rotate(126deg);
+}
+
+.flex19{
+    transform: translate(-50%, -50%) rotate(132deg);
+}
+
+.flex20{
+    transform: translate(-50%, -50%) rotate(138deg);
+}
+
+.flex21{
+    transform: translate(-50%, -50%) rotate(144deg);
+}
+
+.flex22{
+    transform: translate(-50%, -50%) rotate(156deg);
+}
+
+.flex23{
+    transform: translate(-50%, -50%) rotate(162deg);
+}
+
+.flex24{
+    transform: translate(-50%, -50%) rotate(168deg);
+}
+
+.flex25{
+    transform: translate(-50%, -50%) rotate(174deg);
+}
+
+
+.finalCover{
+    width: 90%;
+    height: 90%;
+    z-index: 5;
+    background: wheat;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* digital */
 
 .digital{
     width: 315px;
@@ -215,7 +520,7 @@ main{
     font-size: 25px;
     font-family: "myDigitalFont", sans-serif;
     font-weight: 900;
-    color: rgba(221, 39, 39, 0.904);
+    color: #dd2727e7;
     border-left: 4px solid #131212;
     border-right: 4px solid #131212;
     position: relative;
@@ -317,7 +622,7 @@ main{
     flex-direction: column;
     justify-content: space-around;
     font-family: "myDigitalFont", sans-serif;
-    color: rgba(221, 39, 39, 0.904);
+    color: #dd2727e7;
 }
 
 .date{
@@ -370,4 +675,255 @@ main{
     100%{
         transform: rotate(360deg);
     }
+}
+
+
+
+.digitalMenu{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: #131212;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.closeMenu, .closeAnlMenu{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    color: rosybrown;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.digitalMenu.open{
+    display: flex;
+}
+
+.digitalMenu.close{
+    display: none;
+}
+
+#menuCont{
+    width: 300px;
+    height: fit-content;
+    background: #c0c0c0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+label[for="state"], label[for="color"]{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    font-family: "myDigitalFont";
+    font-weight: 900;
+}
+
+.el{
+    font-size: 20px;
+}
+
+#state{
+    width: 100%;
+    height: 23px;
+    outline: none;
+    border-radius: 11.5px;
+    background: none;
+    border: none;
+    box-shadow: 0px 0px 2px 3.5px rgba(41, 29, 29, 0.158);
+    padding-left: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    font-family: "myDigitalFont";
+}
+
+.colors{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.color{
+    width: 30px;
+    height: 30px;
+    background: white;
+    display: inline-block;
+    border-radius: 50%;
+    position: relative;
+}
+
+.color::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border: 3px solid black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: none;
+}
+
+.red{
+    background: #dd2727e7;
+}
+
+.yellow{
+    background: #fce603;
+}
+
+.green{
+    background: #a8f387;
+}
+
+.plum{
+    background: #ea1a7f;
+}
+
+.blue{
+    background: #16d6fa;
+}
+
+.purp{
+    background: #af87ce;
+}
+
+.color.active::after{
+    display: block;
+}
+
+fieldset{
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+legend{
+    font-family: "myDigitalFont";
+    font-weight: 900;
+}
+
+label[for="for24"], label[for="for12"]{
+    display: flex;
+    column-gap: 10px;
+    font-family: "myDigitalFont";
+    font-weight: 900;
+}
+
+#save{
+    width: 50%;
+    margin: 0 auto;
+    height: 30px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #222121;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px 3.5px rgb(27, 27, 27, .5);
+}
+
+
+
+
+
+
+
+
+
+
+.analogueMenu{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #131212;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.analogueMenu.close{
+    display: none;
+}
+
+.analogueMenu.open{
+    display: flex;
+}
+
+.form{
+    width: 300px;
+    height: auto;
+}
+
+#analogueMenuCont{
+    background: #c0c0c0;
+    width: 100%;
+    height: auto;
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.style1,
+.style2{
+    width: 100%;
+    height: 280px;
+}
+
+.imageType{
+    width: 90%;
+    height: 230px;
+    margin: 0 auto;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageType.active{
+    border: 3px solid #282828;
+}
+
+.imageType img{
+    width: 95%;
+    height: 95%;
+}
+
+.type1El{
+    padding-left: 30px;
+}
+
+#saveBtn{
+    width: 50%;
+    height: 40px;
+    margin: 0 auto;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-weight: 900;
+    font-size: 17px;
+    letter-spacing: .8px;
+    box-shadow: 0px 0px 2px 3.5px rgb(34, 33, 33, .5);
+    cursor: pointer;
+}
+
+.openAnelMenu{
+    position: absolute;
+    top: -30%;
+    left: 0;
+    font-size: 30px;
+    color: silver;
+    cursor: pointer;
 }

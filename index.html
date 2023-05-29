@@ -22,7 +22,11 @@
 
         <div class="appBody">
 
-            <div class="clock analogue">
+            <!-- analogue clock type 1-->
+
+            <div class="clock analogue type1" id="type1">
+
+                <span class="openAnelMenu"><i class="fa fa-wrench" aria-hidden="true"></i></span>
 
                 <div class="mainTimePoles">
                     <div class="pole poleOne"></div>
@@ -38,6 +42,89 @@
                 </div>
                 
             </div>
+
+            <!-- analogue clock type 1-->
+
+            <div class="clock type2" id="type2">
+
+                <span class="openAnelMenu"><i class="fa fa-wrench" aria-hidden="true"></i></span>
+
+                <div class="mainTimePoles2">
+
+                    <div class="mainafter">
+                        <span class="num12 numz">12</span> 
+                        <span class="num6 numz">6</span> 
+                    </div>
+
+                    <div class="otherPole2 flex2"></div>
+                    <div class="otherPole2 flex3"></div>
+                    <div class="otherPole2 flex4"></div>
+                    <div class="otherPole2 flex5"></div>
+
+                    <div class="mainbefore">
+                        <span class="numz num3">3</span>
+                        <span class="numz num9">9</span>
+                    </div>
+
+                    <div class="otherPole2 flex6"></div>
+                    <div class="otherPole2 flex7"></div>
+                    <div class="otherPole2 flex8"></div>
+                    <div class="otherPole2 flex9"></div>
+
+                    <div class="pole2 poleOneII">
+                        <span class="numz num1">1</span>
+                        <span class="numz num7">7</span>
+                    </div>
+
+                    <div class="otherPole2 flex10"></div>
+                    <div class="otherPole2 flex11"></div>
+                    <div class="otherPole2 flex12"></div>
+                    <div class="otherPole2 flex13"></div>
+
+                    <div class="pole2 poleTwoII">
+                        <span class="numz num2">2</span>
+                        <span class="numz num8">8</span>
+                    </div>
+
+                    <div class="otherPole2 flex14"></div>
+                    <div class="otherPole2 flex15"></div>
+                    <div class="otherPole2 flex16"></div>
+                    <div class="otherPole2 flex17"></div>
+
+                    <div class="pole2 poleThreeII">
+                        <span class="numz num4">4</span>
+                        <span class="numz num10">10</span>
+                    </div>
+
+                    <div class="otherPole2 flex18"></div>
+                    <div class="otherPole2 flex19"></div>
+                    <div class="otherPole2 flex20"></div>
+                    <div class="otherPole2 flex21"></div>
+
+                    <div class="pole2 poleFourII">
+                        <span class="numz num5">5</span>
+                        <span class="numz num11">11</span>
+                    </div>
+
+                    <div class="otherPole2 flex22"></div>
+                    <div class="otherPole2 flex23"></div>
+                    <div class="otherPole2 flex24"></div>
+                    <div class="otherPole2 flex25"></div>
+
+                    <div class="finalCover"></div>
+
+                </div>
+
+                <div class="clockCoverII">
+                    <div class="handII hourHandII"></div>
+                    <div class="handII minHandII"></div>
+                    <div class="handII secHandII"></div>
+                </div>
+                
+            </div>
+
+
+            <!-- digital clock-->
 
             <div class="digital">
 
@@ -88,6 +175,83 @@
 
             </div>
 
+        </div>
+
+
+        <!-- analogue clock settings menu -->
+
+        <div class="analogueMenu close">
+
+            <span class="closeAnlMenu"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></span>
+
+            <div class="form">
+                <form action="" id="analogueMenuCont">
+                    <span class="style1">
+                        <div class="imageType active">
+                            <img  class="imgBtn" src="/clockImg/type1.png" alt="type1">
+                        </div>
+                        <div class="type1El">Type One</div>
+                    </span>
+                    <span class="style2">
+                        <div class="imageType">
+                            <img class="imgBtn" src="/clockImg/type2.png" alt="type2">
+                        </div>
+                        <div class="type1El">Type Two</div>
+                    </span>
+
+                    <button id="saveBtn">Save</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- digital clock settings menu -->
+
+        <div class="digitalMenu close">
+
+            <span class="closeMenu"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></span>
+
+            <form action="" id="menuCont">
+                <label for="state">
+
+                    <span class="el">Your State</span>
+                    <input type="text" id="state">
+                    
+                </label>
+
+                <label for="color">
+
+                    <span class="el">Preferred Color</span>
+                    <span class="colors">
+                        <div class="color red active" id="#dd2727e7"></div>
+                        <div class="color yellow" id="#fce603"></div>
+                        <div class="color green" id="#a8f387"></div>
+                        <div class="color plum" id="#ea1a7f"></div>
+                        <div class="color blue" id="#16d6fa"></div>
+                        <div class="color purp" id="#af87ce"></div>
+                    </span>
+                    
+                </label>
+
+                <label for="TDF">
+
+                    <fieldset>
+                        <legend class="el">24 / 12 Hours Format</legend>
+                        <label for="for24">
+                            24Hours Format
+                            <input type="radio" class="Format" name="24/12" id="for24" value="24hours">
+                        </label>
+                        <label for="for12">
+                            12Hours Format
+                            <input type="radio" class="Format" name="24/12" id="for12" value="12hours" checked>
+                        </label>
+                    </fieldset>
+                    
+
+                </label>
+
+                <button id="save">save</button>
+            </form>
         </div>
 
     </main>
